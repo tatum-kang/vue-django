@@ -25,7 +25,7 @@ export default {
   data(){
     return {
       isLoggedIn: this.$session.has('jwt')
-    }
+    } 
   },
   methods:{
     logout(){
