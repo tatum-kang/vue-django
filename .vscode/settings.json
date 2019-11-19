@@ -1,3 +1,5 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "python.pythonPath": "C:\\Users\\student\\development\\vue_django\\todo-back\\venv\\Scripts\\python.exe",
+    "python.linting.enabled": false
 }
