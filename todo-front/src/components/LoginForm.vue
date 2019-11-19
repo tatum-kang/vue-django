@@ -43,6 +43,7 @@
 
 <script>
 import axios from 'axios'
+import router from '@/router'
 export default {
   name: "LoginForm",
   data() {
@@ -61,9 +62,15 @@ export default {
         this.loading = true
         const SERVER_IP = process.env.VUE_APP_SERVER_IP
 
-        axios.get(SERVER_IP, this.credentials)
+        axios.post(SERVER_IP + '/api-token-auth/', this.credentials) 
           .then(response => {
-            console.log(response)
+            // 세션 초기화 사용할 것이다.
+            this.$session.start()
+            // 응답 결과를 세션에 저장 key, value값을 받음 {jwt : response.data.toke}
+            this.$session.set('jwt', response.data.token)
+            //홈으로 보내주겠다. 로그인이 되었다. 
+            router.push('/')
+            // this.$router.push('/')
             this.loading = false
           })
           .catch(error => {
