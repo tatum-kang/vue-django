@@ -24,19 +24,30 @@ export default {
   name:'App',
   data(){
     return {
-      isLoggedIn: this.$session.has('jwt')
+      // isLoggedIn: this.$session.has('jwt')
     } 
   },
   methods:{
     logout(){
       this.$session.destroy()
+      this.$store.dispatch('logout')
       router.push('/login')
     },
   },
-
+  computed:{
+    isLoggedIn(){
+      return this.$store.getters.isLoggedIn
+    }
+  },
   // data에 변화가 일어나느 시점에 실행하는 함수 
-  updated(){
-    this.isLoggedIn = this.$session.has('jwt')
+  // updated(){
+  //   this.isLoggedIn = this.$session.has('jwt')
+  // },
+  mounted(){
+    if(this.$session.has('jwt')){
+      const token = this.$session.get('jwt')
+      this.$store.dispatch('login', token)
+    }
   }
 }
 </script>

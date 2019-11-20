@@ -69,8 +69,10 @@ export default {
             // 응답 결과를 세션에 저장 key, value값을 받음 {jwt : response.data.toke}
             this.$session.set('jwt', response.data.token)
             //홈으로 보내주겠다. 로그인이 되었다. 
+          
+            // vuex store를 this.$store로 접근가능
+            this.$store.dispatch('login', response.data.token)
             router.push('/')
-            // this.$router.push('/')
             this.loading = false
           })
           .catch(error => {
